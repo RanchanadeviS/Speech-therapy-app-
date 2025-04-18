@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Transaction App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: #f0f4f8;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+      width: 380px;
+      text-align: center;
+      margin: 100px auto;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #1e293b;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      border-color: #3b82f6;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    .switch {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .switch a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .switch a:hover {
+      text-decoration: underline;
+    }
+
+    #dashboard {
+      display: none;
+      padding: 40px;
+      max-width: 960px;
+      margin: auto;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 22px;
+      color: #1e3a8a;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #1e3a8a;
+      margin-left: 20px;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: #2563eb;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card h3 {
+      color: #1e3a8a;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #334155;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      color: #64748b;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login/Sign-Up Forms -->
+  <div class="container" id="loginContainer">
+    <div id="signupForm">
+      <h2>Secure Sign Up</h2>
+      <form onsubmit="event.preventDefault(); showDashboard();">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit">Create Account</button>
+      </form>
+      <div class="switch">Already registered? <a href="#" onclick="toggleForm('login')">Login</a></div>
+    </div>
+
+    <div id="loginForm" style="display: none;">
+      <h2>Secure Login</h2>
+      <form onsubmit="event.preventDefault(); showDashboard();">
+        <input type="email" placeholder="Email Address" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+      <div class="switch">Need an account? <a href="#" onclick="toggleForm('signup')">Sign Up</a></div>
+    </div>
+  </div>
+
+  <!-- Dashboard Section -->
+  <div id="dashboard">
+    <header>
+      <h1>My Transactions</h1>
+      <nav>
+        <a href="#">Overview</a>
+        <a href="#">Transfers</a>
+        <a href="#">Security</a>
+        <a href="#" onclick="logout()">Logout</a>
+      </nav>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Balance</h3>
+        <p>$5,230.75 available</p>
+      </div>
+      <div class="card">
+        <h3>Recent Transaction</h3>
+        <p>Paid $240 to John Doe</p>
+      </div>
+      <div class="card">
+        <h3>Security Status</h3>
+        <p>2FA enabled • Last login 1h ago</p>
+      </div>
+      <div class="card">
+        <h3>Support</h3>
+        <p>Contact support or open a ticket</p>
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2025 Secure Transaction App — All Rights Reserved
+    </footer>
+  </div>
+
+  <script>
+    function toggleForm(formType) {
+      document.getElementById('signupForm').style.display = formType === 'signup' ? 'block' : 'none';
+      document.getElementById('loginForm').style.display = formType === 'login' ? 'block' : 'none';
+    }
+
+    function showDashboard() {
+      document.getElementById('loginContainer').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+    }
+
+    function logout() {
+      document.getElementById('dashboard').style.display = 'none';
+      document.getElementById('loginContainer').style.display = 'block';
+      toggleForm('login');
+    }
+  </script>
+</body>
+</html>
