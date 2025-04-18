@@ -3,34 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Secure Transaction App</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Speech Therapy App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
-      background: #f0f4f8;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, #8ec5fc);
       min-height: 100vh;
     }
 
+    /* Container for forms */
     .container {
-      background: #ffffff;
+      background: white;
       padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-      width: 380px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      width: 400px;
       text-align: center;
       margin: 100px auto;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .container:hover {
+      transform: scale(1.03);
     }
 
     h2 {
       margin-bottom: 20px;
-      color: #1e293b;
+      color: #333;
       font-weight: 600;
     }
 
@@ -38,31 +44,31 @@
       width: 100%;
       padding: 12px;
       margin: 10px 0;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
+      border: 2px solid #ccc;
+      border-radius: 30px;
       outline: none;
-      transition: border-color 0.3s;
+      transition: 0.3s;
     }
 
     input:focus {
-      border-color: #3b82f6;
+      border-color: #8ec5fc;
     }
 
     button {
       width: 100%;
       padding: 12px;
-      background: #3b82f6;
+      background: linear-gradient(135deg, #a18cd1, #fbc2eb);
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 30px;
       cursor: pointer;
-      font-size: 16px;
-      font-weight: 600;
-      transition: background 0.3s;
+      font-size: 18px;
+      font-weight: bold;
+      transition: 0.3s;
     }
 
     button:hover {
-      background: #2563eb;
+      background: linear-gradient(135deg, #fbc2eb, #a18cd1);
     }
 
     .switch {
@@ -71,82 +77,83 @@
     }
 
     .switch a {
-      color: #3b82f6;
+      color: #a18cd1;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: bold;
     }
 
     .switch a:hover {
       text-decoration: underline;
     }
 
+    /* Dashboard styles */
     #dashboard {
       display: none;
       padding: 40px;
-      max-width: 960px;
+      max-width: 1000px;
       margin: auto;
     }
 
     header {
-      background: #ffffff;
+      background-color: white;
       padding: 20px 40px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      border-radius: 12px;
-      margin-bottom: 30px;
+      border-radius: 0 0 20px 20px;
     }
 
     header h1 {
-      font-size: 22px;
-      color: #1e3a8a;
+      font-size: 24px;
+      color: #6a1b9a;
     }
 
     nav a {
       text-decoration: none;
-      color: #1e3a8a;
+      color: #6a1b9a;
       margin-left: 20px;
-      font-weight: 600;
+      font-weight: bold;
+      transition: 0.3s;
     }
 
     nav a:hover {
-      color: #2563eb;
+      color: #8e24aa;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
     }
 
     .card {
       background: white;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
-      text-align: center;
-      transition: transform 0.2s;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: 0.3s ease-in-out;
     }
 
     .card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px);
     }
 
     .card h3 {
-      color: #1e3a8a;
       margin-bottom: 10px;
+      color: #6a1b9a;
     }
 
     .card p {
-      color: #334155;
+      color: #555;
     }
 
     footer {
       text-align: center;
       padding: 20px;
-      margin-top: 40px;
-      color: #64748b;
+      margin-top: 50px;
+      color: #6a1b9a;
       font-size: 14px;
     }
   </style>
@@ -156,60 +163,60 @@
   <!-- Login/Sign-Up Forms -->
   <div class="container" id="loginContainer">
     <div id="signupForm">
-      <h2>Secure Sign Up</h2>
+      <h2>Create Your Account</h2>
       <form onsubmit="event.preventDefault(); showDashboard();">
         <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email Address" required>
+        <input type="email" placeholder="Email" required>
         <input type="password" placeholder="Password" required>
-        <button type="submit">Create Account</button>
+        <button type="submit">Sign Up</button>
       </form>
-      <div class="switch">Already registered? <a href="#" onclick="toggleForm('login')">Login</a></div>
+      <div class="switch">Already have an account? <a href="#" onclick="toggleForm('login')">Login</a></div>
     </div>
-
+    
     <div id="loginForm" style="display: none;">
-      <h2>Secure Login</h2>
+      <h2>Welcome Back</h2>
       <form onsubmit="event.preventDefault(); showDashboard();">
-        <input type="email" placeholder="Email Address" required>
+        <input type="email" placeholder="Email" required>
         <input type="password" placeholder="Password" required>
         <button type="submit">Login</button>
       </form>
-      <div class="switch">Need an account? <a href="#" onclick="toggleForm('signup')">Sign Up</a></div>
+      <div class="switch">Don't have an account? <a href="#" onclick="toggleForm('signup')">Sign Up</a></div>
     </div>
   </div>
 
   <!-- Dashboard Section -->
   <div id="dashboard">
     <header>
-      <h1>My Transactions</h1>
+      <h1>Speech Therapy Dashboard</h1>
       <nav>
-        <a href="#">Overview</a>
-        <a href="#">Transfers</a>
-        <a href="#">Security</a>
+        <a href="#">Home</a>
+        <a href="#">Sessions</a>
+        <a href="#">Progress</a>
         <a href="#" onclick="logout()">Logout</a>
       </nav>
     </header>
 
     <div class="grid">
       <div class="card">
-        <h3>Balance</h3>
-        <p>$5,230.75 available</p>
+        <h3>Upcoming Sessions</h3>
+        <p>Your next session is scheduled for <strong>Monday, 10:00 AM</strong> with Dr. Smith.</p>
       </div>
       <div class="card">
-        <h3>Recent Transaction</h3>
-        <p>Paid $240 to John Doe</p>
+        <h3>Progress Overview</h3>
+        <p>You've completed 75% of your therapy milestones. Great work!</p>
       </div>
       <div class="card">
-        <h3>Security Status</h3>
-        <p>2FA enabled • Last login 1h ago</p>
+        <h3>Practice Exercises</h3>
+        <p>Today’s focus: Pronunciation drills & rhythm control. Keep practicing!</p>
       </div>
       <div class="card">
-        <h3>Support</h3>
-        <p>Contact support or open a ticket</p>
+        <h3>Messages</h3>
+        <p>You have <strong>2 new messages</strong> from your therapist.</p>
       </div>
     </div>
 
     <footer>
-      &copy; 2025 Secure Transaction App — All Rights Reserved
+      &copy; 2025 Speech Therapy App | All Rights Reserved
     </footer>
   </div>
 
@@ -230,5 +237,8 @@
       toggleForm('login');
     }
   </script>
+
+
 </body>
 </html>
+
